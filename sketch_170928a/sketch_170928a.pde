@@ -1,21 +1,38 @@
 //setting globals
-int bgcolor = 255;
+int bgcolor = #76A08A;
 boolean state1 = true;
 boolean state2 = false;
 boolean state3 = false;
-PImage[] helmBoy = new PImage[1];
+PImage[] helmBoy = new PImage[16];
 int helmCounter;
-
+PFont titleFont;
+float buttonX, buttonY, buttonWidth, buttonHeight;
+float buttonTop, buttonBottom, buttonLeft, buttonRight;
+int buttonState;
 //sizing
 void setup(){
- size(800,600); 
+ size(400,400); 
  background(bgcolor);
+ //button stuff
+ buttonState = 1;
+ buttonX = 100;
+ buttonY = 300;
+ buttonHeight = 600;
+ buttonWidth = 200;
+ //button stuf contd.
+ buttonTop = buttonY;
+ buttonBottom = buttonY + buttonHeight;
+ buttonLeft = buttonX;
+ buttonRight = buttonX + buttonWidth;
+ 
 }
 
 //checking for each state - running each respectively
 void draw(){
  if (state1){
+   
    menu();
+   
  }else if (state2){
    gameState();
  }else if (state3){
@@ -25,11 +42,27 @@ void draw(){
 
 //main menu animation loop and 'start game' button
 void menu(){
+  background(bgcolor);
+  textAlign(3);
+  fill(#FFF700);
+  titleFont = loadFont("ColonnaMT-48.vlw");
+  textFont(titleFont);
+  textSize(80);
+  text("HELM", width/2, height/2-50);
+  //button stuff
+  if (buttonState == 1){
+    drawButton();
+  }
+  
+  
+  
+  
   for (int i = 0; i < helmBoy.length; i++){
     helmBoy[i] = loadImage(i + ".png");
   }
-  image(helmBoy[helmCounter], width/2, height/2);
-  if (frameCount % 8 == 0) {
+  imageMode(CENTER);
+  image(helmBoy[helmCounter], width/2, height-28);
+  if (frameCount % 5 == 0) {
     helmCounter++;
     helmCounter = helmCounter % helmBoy.length;
   }
