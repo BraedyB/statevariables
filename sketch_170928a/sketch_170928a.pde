@@ -15,10 +15,11 @@ void setup(){
  background(bgcolor);
  //button stuff
  buttonState = 1;
- buttonX = 100;
- buttonY = 300;
- buttonHeight = 600;
- buttonWidth = 200;
+ buttonX = width/2;
+ buttonY = height/2;
+ rectMode(CENTER);
+ buttonHeight = 50;
+ buttonWidth = 50;
  //button stuf contd.
  buttonTop = buttonY;
  buttonBottom = buttonY + buttonHeight;
@@ -66,6 +67,24 @@ void menu(){
     helmCounter++;
     helmCounter = helmCounter % helmBoy.length;
   }
+}
+boolean mouseIsOnButton(){
+  return ((mouseX > buttonLeft) &&
+    (mouseX < buttonRight) &&
+    (mouseY > buttonTop) &&
+    (mouseY < buttonBottom));
+}
+//draws the button
+void drawButton(){
+  
+  if (mouseIsOnButton()){
+    stroke(175);
+  }else{
+    fill(190);
+  }
+  noStroke();
+  rect(buttonX, buttonY, buttonWidth, buttonHeight);
+  
 }
 
 //the main game - shoot down enemies before they reach you
