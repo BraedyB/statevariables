@@ -18,8 +18,8 @@ void setup(){
  buttonX = width/2;
  buttonY = height/2;
  rectMode(CENTER);
- buttonHeight = 50;
- buttonWidth = 50;
+ buttonHeight = 20;
+ buttonWidth = 60;
  //button stuf contd.
  buttonTop = buttonY;
  buttonBottom = buttonY + buttonHeight;
