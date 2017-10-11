@@ -15,9 +15,9 @@ void setup(){
  background(bgcolor);
  //button stuff
  buttonState = 1;
- buttonX = width/2;
+ buttonX = width/2 - 30;
  buttonY = height/2;
- rectMode(CENTER);
+ rectMode(CORNER);
  buttonHeight = 20;
  buttonWidth = 60;
  //button stuf contd.
@@ -35,9 +35,13 @@ void draw(){
    menu();
    
  }else if (state2){
+   
    gameState();
+   
  }else if (state3){
+   
    gameOver();
+   
  }
 }
 
@@ -76,7 +80,6 @@ boolean mouseIsOnButton(){
 }
 //draws the button
 void drawButton(){
-  
   if (mouseIsOnButton()){
     stroke(175);
   }else{
@@ -86,9 +89,17 @@ void drawButton(){
   rect(buttonX, buttonY, buttonWidth, buttonHeight);
   
 }
-
-//the main game - shoot down enemies before they reach you
+void startGame(){
+  if (mouseIsOnButton()){
+    if (mousePressed){
+      state2 = true;
+    }
+  }
+}
+//the main game - run while avoiding falling pillars. pillars last for several seconds after landing
 void gameState(){
+  
+  print("jeff");
   
 }
 
