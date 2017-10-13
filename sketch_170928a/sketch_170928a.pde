@@ -1,4 +1,5 @@
 //setting globals
+boolean timeUp = false;
 int bgcolor = #76A08A;
 boolean state1 = true;
 boolean state2 = false;
@@ -9,6 +10,12 @@ PFont titleFont;
 float buttonX, buttonY, buttonWidth, buttonHeight;
 float buttonTop, buttonBottom, buttonLeft, buttonRight;
 int buttonState;
+boolean mouseIsOnButton(){
+    return ((mouseX > buttonLeft) &&
+    (mouseX < buttonRight) &&
+    (mouseY > buttonTop) &&
+    (mouseY < buttonBottom));
+    }
 //sizing
 void setup(){
  size(400,400); 
@@ -30,15 +37,19 @@ void setup(){
 
 //checking for each state - running each respectively
 void draw(){
+  checkTime();
+  isButtonPressed();
  if (state1){
    
    menu();
    
- }else if (state2){
+ }
+ if (state2){
    
    gameState();
    
- }else if (state3){
+ } 
+ if (state3){
    
    gameOver();
    
@@ -72,12 +83,14 @@ void menu(){
     helmCounter = helmCounter % helmBoy.length;
   }
 }
-boolean mouseIsOnButton(){
-  return ((mouseX > buttonLeft) &&
-    (mouseX < buttonRight) &&
-    (mouseY > buttonTop) &&
-    (mouseY < buttonBottom));
+
+
+void isButtonPressed(){
+  if ((mouseIsOnButton()) && (mousePressed)){
+      state2 = true;
+  }
 }
+
 //draws the button
 void drawButton(){
   if (mouseIsOnButton()){
@@ -89,21 +102,42 @@ void drawButton(){
   rect(buttonX, buttonY, buttonWidth, buttonHeight);
   
 }
-void startGame(){
-  if (mouseIsOnButton()){
-    if (mousePressed){
-      state2 = true;
-    }
+
+void checkTime(){
+  if ((millis() == 20000)){
+    timeUp = true;
   }
 }
-//the main game - run while avoiding falling pillars. pillars last for several seconds after landing
+
+//the main game - the plan was to have the player run while avoiding falling pillars. pillars last for several seconds after landing
 void gameState(){
+
+  background(0);
+  drawGoof();
+    checkTime();
+    if (timeUp = true){
+      state3 = true;
+    }
+  }
   
-  print("jeff");
+
+
+//game ends after you click the screen again. Click once more to go back to the menu.
+void gameOver(){
+  background(0);
   
+  print("You Lose!... I think? Please restart the program.");
+  exit();
 }
 
-//game ends upon an enemy contacting the player
-void gameOver(){
-  
+void drawGoof(){
+  float offset;
+  offset = random(100);
+  background(0);
+  for (float x = offset; x <= width-offset; x += random(100)) {
+    for (float y = offset; y <= height-offset; y += random(100)) {
+      stroke(255, 50);
+      ellipse(x, y, 3, 3);
+    }
+  }
 }
