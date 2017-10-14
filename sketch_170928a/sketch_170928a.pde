@@ -1,3 +1,7 @@
+///STATE VARIABLES ASSIGNMENT
+//BRAEDY B.
+///USED STATE(S) TO CHANGE BETWEEN 3 DIFFERENT SCREENS
+
 //setting globals
 boolean timeUp = false;
 int bgcolor = #76A08A;
